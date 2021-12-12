@@ -91,3 +91,16 @@ function deleteData() {
 }
 
 delBtn.addEventListener("click", deleteData);
+function allData() {
+  firebase
+    .database()
+    .ref("TheStudents")
+    .once("value", function (snapshot) {
+      snapshot.forEach(function (Childsnapshot) {
+        var name = Childsnapshot.val().NameOfStd;
+        var html = `<div><h1>${name}</h1> </div>`;
+        $("#ochua").append(html);
+      });
+    });
+}
+window.onload(allData());
